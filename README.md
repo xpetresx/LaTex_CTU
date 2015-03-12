@@ -37,7 +37,9 @@ Název práce
     \newcommand{\Date}{May 2015}
 ```
 Datum odevzdání práce. Obvykle ve formátu #měsíc #rok
+```
     \newcommand{\Supervisor}{The Supervisor, Ph.D.}
+```
 Jméno vedoucího práce.
 
 Šablona obsahuje volnou stranu pro vložení zadání práce. Oskenované zadání uložit do fig/zadani.jpg a odkomentovat příslušný řádek v mt.tex.
