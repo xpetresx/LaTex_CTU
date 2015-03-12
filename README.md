@@ -9,19 +9,33 @@ Veškeré formátování je součástí souboru doc_head.tex
 Práce se šablonou:
 Hlavním souborem šablony je soubor mt.tex kde je nutné vyplnit několik maker na začátku vlastními údaji.
 Tyto makra jsou:
+```
     \newcommand{\Language}{EN}
+```
 Makro pro volbu jazyka práce. Povolené hodnoty {EN} a {CZ}.
+```
     \newcommand{\Thesis}{M}
+```
 Makro pro volbu typu práce. Povolené hodnoty {B} Bakalářská práce, {M} Diplomová práce, {D} Dizertační práce.
+```
     \newcommand{\Faculty}{Faculty of Electrical Engineering}
+```
 Jméno fakulty (v jazyce ve kterém se píše práce).
+```
     \newcommand{\Department}{Department of Cybernetics}
+```
 Jméno katedry obhajoby (v jazyce ve kterém se píše práce).
+```
     \newcommand{\Author}{Name Surname}
+```
 Jméno autora.
+```
     \newcommand{\Title}{Very very very long title of the thesis}
+```
 Název práce
+```
     \newcommand{\Date}{May 2015}
+```
 Datum odevzdání práce. Obvykle ve formátu #měsíc #rok
     \newcommand{\Supervisor}{The Supervisor, Ph.D.}
 Jméno vedoucího práce.
