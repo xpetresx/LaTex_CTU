@@ -1,0 +1,244 @@
+\usepackage[left=3.0cm,right=2.4cm,top=3cm,bottom=4cm]{geometry}
+
+	\usepackage[utf8]{inputenc}
+	\usepackage{amssymb,amsmath}
+	
+%%Packages definition
+	\usepackage{ifthen}
+	
+	%% language package
+	\ifthenelse{ \equal{\Language}{EN} }{
+  		\usepackage[english]{babel}
+	}{
+  		\usepackage[czech]{babel}
+	}
+    
+	\usepackage{lipsum}		%% lorem ipsum ... 
+	\usepackage{fancyhdr}	%% header and footer
+	\usepackage{graphicx}   %% graphics
+	\usepackage{booktabs}   %% tables
+	\usepackage[cmyk,table]{xcolor} %% colors
+	\usepackage{tikz}		%% diagrams
+
+	\usepackage{caption}	%% figures
+	\usepackage{subcaption}	%% subfigures
+
+	\usepackage{url}		%% web links
+	\usepackage{epstopdf}	%% we all know this one
+
+	\usepackage{multirow}	
+
+	\usepackage[absolute]{textpos}	%% for the page with scanned assignment
+
+%%Colors definition
+	\definecolor{cvutcolor}{cmyk}{1, 0.43, 0, 0} % CVUT blue
+	%\definecolor{cvutcolor}{cmyk}{0, 0.78, 0.78, 0.31} %crimson
+	%\definecolor{cvutcolor}{cmyk}{0.31, 0, 1, 0.27} %green
+	%\definecolor{cvutcolor}{cmyk}{0, 0.35, 1, 0.11} %gold
+	\definecolor{svetlemodra}{cmyk}{0.2, 0.08, 0, 0.1} % CVUT light blue
+	\definecolor{svetleseda}{cmyk}{0, 0, 0, 0.13} % CVUT light gray
+
+%%Okraje stranky
+	\usepackage{lastpage} %% last page reference
+	
+%%Measurement definition - for the blue ruler on the first pages
+	\newlength{\titlewidth}
+	\setlength{\titlewidth}{\textwidth}
+	\addtolength{\titlewidth}{-1.7cm}
+	\newlength{\heightofhw}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\TitlePage}{{
+	\thispagestyle{empty}
+	\parbox{0.7cm}{\color{cvutcolor}\rule{0.35cm}{\textheight}}	%% blue rule
+	{\parbox[0][\textheight][t]{\titlewidth}{ 
+		\sffamily \vspace{10pt}
+		\includegraphics[height=3.1cm]{fig/cvut}	%% lev cvut
+		\ifthenelse{ \equal{\Language}{EN} }{
+  			\put(10,40){\parbox{8cm}{\Large Czech\\ Technical\\ University\\ in Prague}}\\[12pt]
+		}{
+  			\put(10,40){\parbox{8cm}{\large \textsc{České\\ vysoké\\ učení\\ technické\\ v Praze}}}\\[12pt]
+		}
+		\textbf{\large 
+			\color{cvutcolor} {\Faculty} \\[6pt]
+			\color{black} {\Department}
+		}\\[3.5cm]
+		\ifthenelse{ \equal{\Thesis}{B} }{
+			\ifthenelse{ \equal{\Language}{EN} }{
+				\textbf{\large Bachelor's thesis}\\
+			}{
+				\textbf{\large Bakalářská práce}
+			}}{}
+		\ifthenelse{ \equal{\Thesis}{M} }{
+			\ifthenelse{ \equal{\Language}{EN} }{
+				\textbf{\large Master's thesis}\\
+			}{
+				\textbf{\large Diplomová práce}
+			}}{}
+		\ifthenelse{ \equal{\Thesis}{D} }{
+			\ifthenelse{ \equal{\Language}{EN} }{
+				\textbf{\large Ph.D thesis}\\
+			}{
+				\textbf{\large Dizertační práce}
+			}}{}
+		\begin{flushleft}
+			%\begin{Huge}
+			\fontsize{32pt}{2.5em}
+			\selectfont \color{cvutcolor} \textbf{\Title}
+			%\end{Huge}
+			\\[25pt]
+		\end{flushleft}
+		\Large \color{black} \textbf{\Author}\\
+		\vfill{}
+		\textbf{\large \Date} \\
+		\textbf{\large Thesis supervisor:} \Supervisor
+	}}
+	\newpage
+}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PAGESTYLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%definition of pagestyle - normal text - blue header text, blue line pagenumber 
+\fancypagestyle{pagestyle_text}{
+	\fancyhead{}
+	\fancyfoot{}
+	\fancyfoot[RO]{
+		\textbf{\thepage$/$\pageref*{LastPage}}
+		}
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyfoot[RE,LO]{}
+	\fancyfoot[LE]{
+		\textbf{\thepage$/$\pageref*{LastPage}}
+		}
+	
+	\fancyhead[RO]{\color{cvutcolor} \slshape \leftmark}
+	\fancyhead[RE]{}
+	\fancyhead[LE]{\color{cvutcolor} \slshape \leftmark}
+	\fancyhead[LO]{}
+	
+}
+
+%%definition of pagestyle with part heading - no header text, blue line pagenumber
+\fancypagestyle{pagestyle_chapter}{
+	\fancyhead{}
+	\fancyfoot{}
+	\fancyfoot[RO]{
+		\textbf{\thepage$/$\pageref*{LastPage}}
+		}
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyfoot[RE,LO]{}
+	\fancyfoot[LE]{
+		\textbf{\thepage$/$\pageref*{LastPage}}
+		}
+}
+
+%%definition of pagestyle with vertical blue ruler on the left side
+\fancypagestyle{pagestyle_blue_rule}{
+	\fancyhead{}
+	\fancyfoot{}
+	\fancyhead[L]{
+		\hspace{-1cm}
+		\begin{tikzpicture}
+		\color{cvutcolor} \draw [line width=0.35cm] (0,-1) -- (0,-1.06\textheight);
+		\end{tikzpicture}
+		\vspace{-1.06\textheight}
+	}
+	\fancyfoot[C]{\thepage \qquad \qquad \qquad}
+	\renewcommand{\headrulewidth}{0pt}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% OTHER OPTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%definition of hyperlinks in the text
+\usepackage[
+	bookmarks=true,
+	hypertexnames=false,
+	breaklinks=true,
+	colorlinks=false,
+	urlcolor=blue,
+	linktoc=section,
+	linkbordercolor={1 0.8 0},
+	citebordercolor={0.36 0.54 0.76}%cyan%{0 0.68 0.84}%{0 0.36 0.72}%{0 1 0}
+]{hyperref}
+
+
+%% PDF properties
+\hypersetup{  
+	pdfauthor={\Author},
+	pdftitle={\Title},
+%	pdfsubject={\Subject},
+%	pdfkeywords={\Keywords}
+}
+
+%redefinition of part(sffamily vertical blue rule)
+\makeatletter
+\let\stdpart\part
+\renewcommand*\part{%
+  \@ifstar{\starpart}{\@dblarg\nostarpart}}
+\newcommand*\starpart[1]{
+	\thispagestyle{pagestyle_chapter}
+	\settoheight{\heightofhw}{\parbox{\titlewidth}{\Huge{{Part X\\ \sffamily #1}}}}
+	\parbox{0.7cm}{\color{cvutcolor}\rule{0.35cm}{2.3\heightofhw}}
+	{\parbox{\titlewidth}{
+		\stdpart*{{\sffamily #1}}
+	}}\\[1cm]
+}
+\def\nostarpart[#1]#2{
+	\thispagestyle{pagestyle_chapter}
+	\settoheight{\heightofhw}{\parbox{\titlewidth}{\Huge{{Part X\\ \textbf{\sffamily #2}}}}}
+	\parbox{0.7cm}{\color{cvutcolor}\rule{0.35cm}{2.5\heightofhw}}
+	\parbox{\titlewidth}{
+  		\stdpart[{#1}]{{\sffamily #2}}
+  	}\\[1cm]
+}
+\makeatother
+
+%redefinition of section(sffamily)
+\makeatletter
+\let\stdsection\section
+\renewcommand*\section{%
+  \@ifstar{\starsection}{\@dblarg\nostarsection}}
+\newcommand*\starsection[1]{
+	\stdsection*{{\sffamily #1}}
+}
+\def\nostarsection[#1]#2{
+	\settoheight{\heightofhw}{\parbox{\titlewidth}{\Large{\textbf{X \sffamily #2}}}}
+	\parbox{0.7cm}{\vspace{5pt} \color{cvutcolor}\rule{0.35cm}{1.7\heightofhw}}
+	\parbox{\titlewidth}{\stdsection[{#1}]{{\sffamily #2}}}\\[1em]
+	\sectionmark{#2}
+}
+%\makeatother
+
+%redefinition of subsection(sffamily)
+\makeatletter
+\let\stdsubsection\subsection
+\renewcommand*\subsection{%
+  \@ifstar{\starsubsection}{\@dblarg\nostarsubsection}}
+\newcommand*\starsubsection[1]{
+	\stdsubsection*{{\sffamily #1}}
+}
+\def\nostarsubsection[#1]#2{
+	\settoheight{\heightofhw}{\parbox{\titlewidth}{\large{\textbf{X \sffamily #2}}}}
+	\parbox{0.7cm}{\vspace{5pt} \color{cvutcolor}\rule{0.35cm}{1.7\heightofhw}}
+	\parbox{\titlewidth}{\stdsubsection[{#1}]{{\sffamily #2}}}\\[1em]
+}
+
+%redefinition of subsubsection(sffamily)
+\makeatletter
+\let\stdsubsubsection\subsubsection
+\renewcommand*\subsubsection{%
+  \@ifstar{\starsubsubsection}{\@dblarg\nostarsubsubsection}}
+\newcommand*\starsubsubsection[1]{
+	\stdsubsubsection*{{\sffamily #1}}
+}
+\def\nostarsubsubsection[#1]#2{
+	\settoheight{\heightofhw}{\parbox{\titlewidth}{\textbf{X \sffamily #2}}}
+	\parbox{0.7cm}{\vspace{5pt} \color{cvutcolor}\rule{0.35cm}{1.7\heightofhw}}
+	\parbox{\titlewidth}{\stdsubsubsection[{#1}]{{\sffamily #2}}}\\[1em]
+}

@@ -1,0 +1,73 @@
+\documentclass[a4paper,12pt,titlepage,twoside]{article}
+
+\newcommand{\Language}{EN}
+%varianty {EN} english
+%         {CZ} czech
+\newcommand{\Thesis}{M}
+%varianty {B} bakalářská práce
+%         {M} diplomová práce
+%         {D} dizertační práce
+\newcommand{\Faculty}{Faculty of Electrical Engineering}
+\newcommand{\Department}{Department of Cybernetics}
+\newcommand{\Author}{Name Surname}
+\newcommand{\Title}{Very very very long title of the thesis}
+\newcommand{\Date}{May 2015}
+\newcommand{\Supervisor}{The Supervisor, Ph.D.}
+
+%% definice pouziteho vzoru %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{src/doc_head}
+
+\begin{document}
+%% uvodni stranka %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\TitlePage
+
+%% stranka s naskenovanym zadanim prace %%%%%%%%%%%%%%%%%
+\thispagestyle{empty}
+\begin{textblock*}{\paperwidth}(0mm,0mm)
+%   \noindent\includegraphics[width=\paperwidth,height=\paperheight]{fig/zadani.jpg}
+\end{textblock*}
+\mbox{}
+\newpage
+
+\pagestyle{pagestyle_blue_rule}
+\newgeometry{ left=4.7cm,right=3.0cm,top=3cm,bottom=4cm, twoside=false}
+
+\pagenumbering{roman}
+%% prohlaseni,podekovani,abstrakt %%%%%%%%%%%%%%%%%%%%%%%
+	\newpage
+	\input{src/prohlaseni}
+	\newpage
+	\input{src/podekovani}
+	\newpage
+	\input{src/abstrakt}
+	\newpage
+%% obsah %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\tableofcontents
+	\newpage
+%% seznam obrazku a tabulek %%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	\listoffigures
+	\newpage
+	\listoftables
+%	\newpage
+%	\listoflistings
+\restoregeometry
+\clearpage
+
+\pagestyle{pagestyle_text}
+\pagenumbering{arabic}
+%% VLASTNI PRACE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{src/lip}
+\clearpage
+\input{src/lip}
+
+%% literatura %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\bibliography{mt}
+\bibliographystyle{unsrt}
+
+%% obsah CD %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\cleardoublepage
+%\thispagestyle{empty}
+%\input{src/obsah_CD}
+
+\end{document}
