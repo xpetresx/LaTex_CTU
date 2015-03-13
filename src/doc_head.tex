@@ -49,7 +49,9 @@
 
 %% LANGUAGE SWITCH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ifthenelse{ \equal{\Language}{EN} }{	
-	\newcommand{\MySchoolName}{Czech\\ Technical\\ University\\ in Prague}
+	\AtBeginDocument{\renewcommand{\partname}{\sffamily Part}}
+	
+	\newcommand{\MySchoolName}{\Large \textsc{Czech\\ Technical\\ University\\ in Prague}}
 	\newcommand{\MySupervisorLabel}{Thesis supervisor:}
 	\ifthenelse{ \equal{\Thesis}{B} }{
 		\newcommand{\MyThesisType}{Bachelor's thesis}
@@ -59,7 +61,10 @@
 		\newcommand{\MyThesisType}{Ph.D thesis}
 	}{}
 }{
-	\newcommand{\MySchoolName}{\textsc{České\\ vysoké\\ učení\\ technické\\ v Praze}}
+	\AtBeginDocument{\renewcommand{\partname}{\sffamily Kapitola}}
+	\AtBeginDocument{\renewcommand{\refname}{Literatura}}
+	
+	\newcommand{\MySchoolName}{\large \textsc{České\\ vysoké\\ učení\\ technické\\ v Praze}}
 	\newcommand{\MySupervisorLabel}{Vedoucí práce:}
 	\ifthenelse{ \equal{\Thesis}{B} }{
 		\newcommand{\MyThesisType}{Bakalářská práce}
@@ -77,22 +82,22 @@
 	\thispagestyle{empty}
 	\parbox{0.7cm}{\color{cvutcolor}\rule{0.35cm}{\textheight}}	%% blue rule
 	{\parbox[0][\textheight][t]{\titlewidth}{ 
-		\sffamily \vspace{10pt}
+		\vspace{10pt}  		
+		\sffamily 
 		\includegraphics[height=3.1cm]{fig/cvut}	%% lev cvut
-  		\put(10,40){\parbox{8cm}{\Large \MySchoolName}}\\[12pt]
+  		\put(10,40){\parbox{8cm}{\MySchoolName}}\\[12pt]
+
 		\textbf{\large 
 			\color{cvutcolor} {\Faculty} \\[6pt]
 			\color{black} {\Department}
-		}\\[3.5cm]	
-			
-		\textbf{\large \MyThesisType}\\	
-		
+		}\\[3.1cm]	
+		\textbf{\large \MyThesisType}\\[-1em]	
 		\begin{flushleft}
 			%\begin{Huge}
 			\fontsize{32pt}{2.5em}
 			\selectfont \color{cvutcolor} \textbf{\Title}
 			%\end{Huge}
-			\\[25pt]
+			\\[1em]	
 		\end{flushleft}
 		\Large \color{black} \textbf{\Author}\\
 		\vfill{}
@@ -182,6 +187,7 @@
 
 %redefinition of part(sffamily vertical blue rule)
 \makeatletter
+\renewcommand \thepart {\sffamily\@arabic\c@part}
 \let\stdpart\part
 \renewcommand*\part{%
   \@ifstar{\starpart}{\@dblarg\nostarpart}}
@@ -200,21 +206,23 @@
 	\parbox{\titlewidth}{
   		\stdpart[{#1}]{{\sffamily #2}}
   	}\\[1cm]
+  	\sectionmark{#2}
 }
 \makeatother
 
 %redefinition of section(sffamily)
 \makeatletter
+\renewcommand \thesection {\sffamily\@arabic\c@section}
 \let\stdsection\section
 \renewcommand*\section{%
   \@ifstar{\starsection}{\@dblarg\nostarsection}}
 \newcommand*\starsection[1]{
-	\stdsection*{{\sffamily #1}}
+	 \stdsection*{{\sffamily #1}}
 }
 \def\nostarsection[#1]#2{
 	\settoheight{\heightofhw}{\parbox{\titlewidth}{\Large{\textbf{X \sffamily #2}}}}
-	\parbox{0.7cm}{\vspace{5pt} \color{cvutcolor}\rule{0.35cm}{1.7\heightofhw}}
-	\parbox{\titlewidth}{\stdsection[{#1}]{{\sffamily #2}}}\\[1em]
+	\parbox{0.7cm}{\vspace{7pt} \color{cvutcolor}\rule{0.35cm}{1.9\heightofhw}}
+	\parbox{\titlewidth}{\stdsection[{#1}]{{ \sffamily #2}}}\\[1em]
 	\sectionmark{#2}
 }
 %\makeatother
@@ -229,7 +237,7 @@
 }
 \def\nostarsubsection[#1]#2{
 	\settoheight{\heightofhw}{\parbox{\titlewidth}{\large{\textbf{X \sffamily #2}}}}
-	\parbox{0.7cm}{\vspace{5pt} \color{cvutcolor}\rule{0.35cm}{1.7\heightofhw}}
+	\parbox{0.7cm}{\vspace{8pt} \color{cvutcolor}\rule{0.35cm}{1.9\heightofhw}}
 	\parbox{\titlewidth}{\stdsubsection[{#1}]{{\sffamily #2}}}\\[1em]
 }
 
@@ -243,6 +251,6 @@
 }
 \def\nostarsubsubsection[#1]#2{
 	\settoheight{\heightofhw}{\parbox{\titlewidth}{\textbf{X \sffamily #2}}}
-	\parbox{0.7cm}{\vspace{5pt} \color{cvutcolor}\rule{0.35cm}{1.7\heightofhw}}
+	\parbox{0.7cm}{\vspace{8pt} \color{cvutcolor}\rule{0.35cm}{1.7\heightofhw}}
 	\parbox{\titlewidth}{\stdsubsubsection[{#1}]{{\sffamily #2}}}\\[1em]
 }
