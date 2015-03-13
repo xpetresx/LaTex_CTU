@@ -1,5 +1,7 @@
 ﻿# LaTex_CTU
 
+<b>!!SLEDUJTE TUTO STRÁNKU PRO PRŮBĚŽNÉ AKTUALIZACE ŠABLONY!!</b>
+
 Tento repozitář obsahuje šablonu pro tvorbu závěrečných prací na ČVUT. Šablona vychází z velmi zdařilé šablony pana Olšáka, která je ovšem psána v plain Texu. Tato šablona neposkytuje takovou variabilitu jako šablona pana Olšáka a není k ní zatím žádný manuál k použití.
 
 Šablona podporuje základní typy práce: bakalářskou, diplomovou a dizertační v češtině a angličtině. 
@@ -45,6 +47,6 @@ Jméno vedoucího práce.
 Šablona obsahuje volnou stranu pro vložení zadání práce. Oskenované zadání uložit do fig/zadani.jpg a odkomentovat příslušný řádek v mt.tex.
 Šablona obsahuje prohlášení s připraveným místem pro vložení podpisu. Oskenovaný podpis uložit do fig/podpis.jpg a odkomentovat příslušný řádek v src/prohlaseni.tex.
 
-K šabloně poskytnu omezenou podporu v rámci svých časových možností. Šablona je k dispozici "jak je" pro volné použití. Uvítám pozitivní i negativní hodnocení.
+K šabloně poskytnu omezenou technickou podporu v rámci svých časových možností. Šablona je k dispozici "jak je" pro volné použití. Uvítám pozitivní i negativní hodnocení a kdokoli je vítán připojit se k vývoji.
 
 Petr
