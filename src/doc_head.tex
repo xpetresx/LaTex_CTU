@@ -1,34 +1,9 @@
-\usepackage[left=3.0cm,right=2.4cm,top=3cm,bottom=4cm]{geometry}
-
-	\usepackage[utf8]{inputenc}
-	\usepackage{amssymb,amsmath}
-	
-%%Packages definition
-	\usepackage{ifthen}
-	
-	%% language package
-	\ifthenelse{ \equal{\Language}{EN} }{
-  		\usepackage[english]{babel}
-	}{
-  		\usepackage[czech]{babel}
-	}
-    
-	\usepackage{lipsum}		%% lorem ipsum ... 
-	\usepackage{fancyhdr}	%% header and footer
-	\usepackage{graphicx}   %% graphics
-	\usepackage{booktabs}   %% tables
-	\usepackage[cmyk,table]{xcolor} %% colors
-	\usepackage{tikz}		%% diagrams
-
-	\usepackage{caption}	%% figures
-	\usepackage{subcaption}	%% subfigures
-
-	\usepackage{url}		%% web links
-	\usepackage{epstopdf}	%% we all know this one
-
-	\usepackage{multirow}	
-
-	\usepackage[absolute]{textpos}	%% for the page with scanned assignment
+%% language package
+\ifthenelse{ \equal{\Language}{EN} }{
+	\usepackage[english]{babel}
+}{
+	\usepackage[czech]{babel}
+}
 
 %%Colors definition
 	\definecolor{cvutcolor}{cmyk}{1, 0.43, 0, 0} % CVUT blue
@@ -37,9 +12,6 @@
 	%\definecolor{cvutcolor}{cmyk}{0, 0.35, 1, 0.11} %gold
 	\definecolor{svetlemodra}{cmyk}{0.2, 0.08, 0, 0.1} % CVUT light blue
 	\definecolor{svetleseda}{cmyk}{0, 0, 0, 0.13} % CVUT light gray
-
-%%Okraje stranky
-	\usepackage{lastpage} %% last page reference
 	
 %%Measurement definition - for the blue ruler on the first pages
 	\newlength{\titlewidth}
