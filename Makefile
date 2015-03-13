@@ -4,6 +4,7 @@ BIBTEX   := bibtex
 TARGET   := mt
 
 all: pdf
+	$(MAKE) -C . pdf
 	$(MAKE) -C . bib
 	$(MAKE) -C . pdf
 	@echo -e "\033[0;33m"
