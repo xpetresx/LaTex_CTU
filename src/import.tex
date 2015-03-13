@@ -25,3 +25,10 @@
 	
 %%Okraje stranky
 \usepackage{lastpage} %% last page reference
+
+%% language package
+\ifthenelse{ \equal{\Language}{EN} }{
+	\usepackage[english]{babel}
+}{
+	\usepackage[czech]{babel}
+}
