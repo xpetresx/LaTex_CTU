@@ -186,17 +186,18 @@
 
 %redefinition of part(sffamily vertical blue rule)
 \makeatletter
-\renewcommand \thepart {\sffamily\@arabic\c@part}
 \let\stdpart\part
 \renewcommand*\part{%
   \@ifstar{\starpart}{\@dblarg\nostarpart}}
 \newcommand*\starpart[1]{
 	\thispagestyle{pagestyle_chapter}
-	\settoheight{\heightofhw}{\parbox{\titlewidth}{\Huge{{Part X\\ \sffamily #1}}}}
+	\settoheight{\heightofhw}{\parbox{\titlewidth}{\Huge{{\sffamily #1}}}}
 	\parbox{0.7cm}{\color{cvutcolor}\rule{0.35cm}{2.3\heightofhw}}
-	{\parbox{\titlewidth}{
+	{\parbox[0][3cm][c]{\titlewidth}{
 		\stdpart*{{\sffamily #1}}
 	}}\\[1cm]
+  	\sectionmark{#1}
+  	\addcontentsline{toc}{part}{\sffamily{\hspace{1.5em}#1}}
 }
 \def\nostarpart[#1]#2{
 	\thispagestyle{pagestyle_chapter}
@@ -209,47 +210,60 @@
 }
 \makeatother
 
-%redefinition of section(sffamily)
+%definition of numbering - numbers are going in order Part.Section.Subsection.Subsubsection...
 \makeatletter
-\renewcommand \thesection {\sffamily\@arabic\c@section}
-\let\stdsection\section
-\renewcommand*\section{%
-  \@ifstar{\starsection}{\@dblarg\nostarsection}}
-\newcommand*\starsection[1]{
-	 \stdsection*{{\sffamily #1}}
-}
-\def\nostarsection[#1]#2{
-	\settoheight{\heightofhw}{\parbox{\titlewidth}{\Large{\textbf{X \sffamily #2}}}}
-	\parbox{0.7cm}{\vspace{7pt} \color{cvutcolor}\rule{0.35cm}{1.9\heightofhw}}
-	\parbox{\titlewidth}{\stdsection[{#1}]{{ \sffamily #2}}}\\[1em]
-	\sectionmark{#2}
-}
-%\makeatother
+\@addtoreset{section}{part} %reseting section counter with every chapter
 
-%redefinition of subsection(sffamily)
-\makeatletter
-\let\stdsubsection\subsection
-\renewcommand*\subsection{%
-  \@ifstar{\starsubsection}{\@dblarg\nostarsubsection}}
-\newcommand*\starsubsection[1]{
-	\stdsubsection*{{\sffamily #1}}
-}
-\def\nostarsubsection[#1]#2{
-	\settoheight{\heightofhw}{\parbox{\titlewidth}{\large{\textbf{X \sffamily #2}}}}
-	\parbox{0.7cm}{\vspace{8pt} \color{cvutcolor}\rule{0.35cm}{1.9\heightofhw}}
-	\parbox{\titlewidth}{\stdsubsection[{#1}]{{\sffamily #2}}}\\[1em]
-}
+\renewcommand\thepart{\sffamily\arabic{part}}
+\renewcommand\thesection{\thepart.\sffamily\arabic{section}}
+\renewcommand\thesubsection{\thesection.\sffamily\arabic{subsection}}
+\makeatother
 
-%redefinition of subsubsection(sffamily)
+%formating of the table of content
 \makeatletter
-\let\stdsubsubsection\subsubsection
-\renewcommand*\subsubsection{%
-  \@ifstar{\starsubsubsection}{\@dblarg\nostarsubsubsection}}
-\newcommand*\starsubsubsection[1]{
-	\stdsubsubsection*{{\sffamily #1}}
-}
-\def\nostarsubsubsection[#1]#2{
-	\settoheight{\heightofhw}{\parbox{\titlewidth}{\textbf{X \sffamily #2}}}
-	\parbox{0.7cm}{\vspace{8pt} \color{cvutcolor}\rule{0.35cm}{1.7\heightofhw}}
-	\parbox{\titlewidth}{\stdsubsubsection[{#1}]{{\sffamily #2}}}\\[1em]
-}
+\renewcommand*\l@section{\@dottedtocline{1}{2.2em}{2em}}		%tab of sections
+\renewcommand*\l@subsection{\@dottedtocline{2}{4.2em}{2.7em}}	%tab of subsections 4.2 = 2.2 + 2 from the previous line
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{6.9em}{3.6em}}%tab of subsubsections 6.9 = 4.2 + 2.7 from the previous line
+\makeatother
+
+
+%redefinition for vertical blue rule befor sections and subsections .. NEVER ever try to modify this part of code :D
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\Large\bfseries\sffamily}}
+\newcommand{\vertrule}{\hspace{0.62cm}{\color{cvutcolor}\rule{0.35cm}{0.8em}}\hspace{0.5cm}}
+\def\@sect#1#2#3#4#5#6[#7]#8{%
+  \ifnum #2>\c@secnumdepth
+    \let\@svsec\@empty
+  \else
+    \refstepcounter{#1}%
+    \protected@edef\@svsec{\@seccntformat{#1}\relax}%
+  \fi
+  \@tempskipa #5\relax
+  \ifdim \@tempskipa>\z@
+    \begingroup
+      #6{%
+        \@hangfrom{\vertrule \hskip #3\relax\@svsec}%
+          \interlinepenalty \@M #8\@@par}%
+    \endgroup
+    \csname #1mark\endcsname{#7}%
+    \addcontentsline{toc}{#1}{%
+      \ifnum #2>\c@secnumdepth \else
+        \protect\numberline{\csname the#1\endcsname}%
+      \fi
+      #7}%
+  \else
+    \def\@svsechd{%
+      #6{\hskip #3\relax
+      \@svsec #8}%
+      \csname #1mark\endcsname{#7}%
+      \addcontentsline{toc}{#1}{%
+        \ifnum #2>\c@secnumdepth \else
+          \protect\numberline{\csname the#1\endcsname}%
+        \fi
+        #7}}%
+  \fi
+  \@xsect{#5}}
+\makeatother

@@ -63,11 +63,14 @@
 \pagenumbering{arabic}
 %% VLASTNI PRACE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{src/lip}
-\clearpage
-\input{src/lip}
+%\clearpage
+%\input{src/lip}
 
 %% literatura %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
+\part*{\refname}
+\renewcommand{\refname}{}
+\vspace{-2cm}
 \bibliography{mt}
 \bibliographystyle{unsrt}
 
